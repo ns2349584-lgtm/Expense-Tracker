@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | Expense Tracker</title>
+
+    <style>
+        :root {
+            --bg: #f4f7fb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --secondary: #6b7280;
+            --border: #e5e7eb;
+            --input: #ffffff;
+            --primary: #4f46e5;
+        }
+
+        [data-theme="dark"] {
+            --bg: #111827;
+            --card: #1f2937;
+            --text: #f9fafb;
+            --secondary: #9ca3af;
+            --border: #374151;
+            --input: #111827;
+            --primary: #6366f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .auth-header p {
+            margin-top: 8px;
+            color: var(--secondary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            background: var(--input);
+            color: var(--text);
+        }
+
+        input:focus {
+            border-color: var(--primary);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .auth-btn:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .footer {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--secondary);
+        }
+
+        .footer a {
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .theme-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        @media (max-width: 500px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-card">
+
+        <div class="auth-header">
+            <div class="logo">💰</div>
+
+            <h1>Create Account</h1>
+
+            <p>Start managing your finances today.</p>
+        </div>
+
+
+        <form id="signupForm">
+
+            <div class="form-group">
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    required
+                >
+            </div>
+
+
+            <button
+                type="submit"
+                class="auth-btn"
+            >
+                Create Account
+            </button>
+
+            <div
+                id="signupMessage"
+                class="message"
+            ></div>
+
+        </form>
+
+
+        <div class="footer">
+            <p>
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+        </div>
+
+
+        <button
+            id="themeToggle"
+            class="theme-btn"
+        >
+            🌙 Toggle Theme
+        </button>
+
+    </div>
+
+
+    <script>
+
+        let theme =
+            localStorage.getItem("theme") || "light";
+
+
+        function applyTheme() {
+
+            document.documentElement.setAttribute(
+                "data-theme",
+                theme
+            );
+
+        }
+
+
+        applyTheme();
+
+
+        document
+            .getElementById("themeToggle")
+            .addEventListener("click", function() {
+
+                theme =
+                    theme === "light"
+                        ? "dark"
+                        : "light";
+
+                localStorage.setItem(
+                    "theme",
+                    theme
+                );
+
+                applyTheme();
+
+            });
+
+
+        document
+            .getElementById("signupForm")
+            .addEventListener("submit", function(e) {
+
+                e.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+
+
+                const message =
+                    document.getElementById(
+                        "signupMessage"
+                    );
+
+
+                if (password !== confirmPassword) {
+
+                    message.textContent =
+                        "Passwords do not match.";
+
+                    message.style.color =
+                        "#e74c3c";
+
+                    return;
+
+                }
+
+
+                let users =
+                    JSON.parse(
+                        localStorage.getItem("users")
+                    ) || [];
+
+
+                const existingUser =
+                    users.find(
+                        user =>
+                            user.email === email
+                    );
+
+
+                if (existingUser) {
+
+                    message.textContent =
+                        "Email already registered.";
+
+                    message.style.color =
+                        "#e74c3c";
+
+                    return;
+
+                }
+
+
+                const newUser = {
+
+                    id: Date.now(),
+
+                    name: name,
+
+                    email: email,
+
+                    password: password
+
+                };
+
+
+                users.push(newUser);
+
+
+                localStorage.setItem(
+                    "users",
+                    JSON.stringify(users)
+                );
+
+
+                message.textContent =
+                    "Account created successfully!";
+
+                message.style.color =
+                    "#2ecc71";
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "login.html";
+
+                }, 1000);
+
+            });
+
+    </script>
+
+</body>
+
+</html>

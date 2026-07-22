@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Expense Tracker</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <header class="header">
+
+        <div class="header-left">
+
+            <h1>
+                💰 Expense Tracker
+            </h1>
+
+            <p>
+                Welcome,
+                <span id="userName">
+                    User
+                </span>
+            </p>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <select id="currencySelect">
+
+                <option value="USD">
+                    USD - $
+                </option>
+
+                <option value="EUR">
+                    EUR - €
+                </option>
+
+                <option value="GBP">
+                    GBP - £
+                </option>
+
+                <option value="INR">
+                    INR - ₹
+                </option>
+
+                <option value="JPY">
+                    JPY - ¥
+                </option>
+
+                <option value="AUD">
+                    AUD - A$
+                </option>
+
+                <option value="CAD">
+                    CAD - C$
+                </option>
+
+                <option value="CHF">
+                    CHF - ₣
+                </option>
+
+                <option value="CNY">
+                    CNY - ¥
+                </option>
+
+                <option value="SEK">
+                    SEK - kr
+                </option>
+
+                <option value="NZD">
+                    NZD - NZ$
+                </option>
+
+                <option value="MXN">
+                    MXN - ₱
+                </option>
+
+                <option value="SGD">
+                    SGD - S$
+                </option>
+
+                <option value="HKD">
+                    HKD - HK$
+                </option>
+
+                <option value="NOK">
+                    NOK - kr
+                </option>
+
+                <option value="KRW">
+                    KRW - ₩
+                </option>
+
+                <option value="BRL">
+                    BRL - R$
+                </option>
+
+                <option value="ZAR">
+                    ZAR - R
+                </option>
+
+            </select>
+
+
+            <button id="themeToggle">
+
+                <span class="theme-icon">
+                    🌙
+                </span>
+
+            </button>
+
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+
+        <div
+            id="exchangeRateInfo"
+            class="exchange-info"
+        ></div>
+
+
+        <section class="dashboard">
+
+
+            <div class="summary-card">
+
+                <h3>
+                    Total Balance
+                </h3>
+
+                <h2 id="totalBalance">
+                    $0.00
+                </h2>
+
+            </div>
+
+
+            <div class="summary-card income">
+
+                <h3>
+                    Total Income
+                </h3>
+
+                <h2 id="totalIncome">
+                    $0.00
+                </h2>
+
+            </div>
+
+
+            <div class="summary-card expense">
+
+                <h3>
+                    Total Expenses
+                </h3>
+
+                <h2 id="totalExpenses">
+                    $0.00
+                </h2>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <h3>
+                    Transactions
+                </h3>
+
+                <h2 id="transactionCount">
+                    0
+                </h2>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="content-grid">
+
+
+            <div class="card">
+
+
+                <h2>
+                    Add New Transaction
+                </h2>
+
+
+                <form id="transactionForm">
+
+
+                    <div class="form-group">
+
+                        <label for="title">
+                            Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="e.g. Grocery Shopping"
+                        >
+
+                        <small
+                            id="titleError"
+                            class="error-message"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="amount">
+                            Amount
+                        </label>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            step="0.01"
+                            min="0"
+                            placeholder="Enter amount"
+                        >
+
+                        <small
+                            id="amountError"
+                            class="error-message"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="type">
+                            Type
+                        </label>
+
+                        <select id="type">
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="income">
+                                Income
+                            </option>
+
+                            <option value="expense">
+                                Expense
+                            </option>
+
+                        </select>
+
+                        <small
+                            id="typeError"
+                            class="error-message"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <select id="category">
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="food">
+                                Food
+                            </option>
+
+                            <option value="travel">
+                                Travel
+                            </option>
+
+                            <option value="shopping">
+                                Shopping
+                            </option>
+
+                            <option value="education">
+                                Education
+                            </option>
+
+                            <option value="bills">
+                                Bills
+                            </option>
+
+                            <option value="entertainment">
+                                Entertainment
+                            </option>
+
+                            <option value="health">
+                                Health
+                            </option>
+
+                            <option value="salary">
+                                Salary
+                            </option>
+
+                            <option value="bonus">
+                                Bonus
+                            </option>
+
+                            <option value="investment">
+                                Investment
+                            </option>
+
+                            <option value="other">
+                                Other
+                            </option>
+
+                        </select>
+
+                        <small
+                            id="categoryError"
+                            class="error-message"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                        >
+
+                        <small
+                            id="dateError"
+                            class="error-message"
+                        ></small>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Add Transaction
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+            <div class="card">
+
+
+                <h2>
+                    Expense Summary
+                </h2>
+
+
+                <div id="expenseSummary">
+
+                    <p class="empty-message">
+                        No expenses to display
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <section class="card transactions-section">
+
+
+            <div class="section-header">
+
+                <h2>
+
+                    All Transactions
+
+                    <span id="filteredCount">
+                        (0 transactions)
+                    </span>
+
+                </h2>
+
+
+                <button
+                    id="clearAllBtn"
+                    class="danger-btn"
+                >
+                    Clear All
+                </button>
+
+            </div>
+
+
+            <div class="filters">
+
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search transactions..."
+                >
+
+
+                <select id="filterType">
+
+                    <option value="all">
+                        All Types
+                    </option>
+
+                    <option value="income">
+                        Income
+                    </option>
+
+                    <option value="expense">
+                        Expense
+                    </option>
+
+                </select>
+
+
+                <select id="filterCategory">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="food">
+                        Food
+                    </option>
+
+                    <option value="travel">
+                        Travel
+                    </option>
+
+                    <option value="shopping">
+                        Shopping
+                    </option>
+
+                    <option value="education">
+                        Education
+                    </option>
+
+                    <option value="bills">
+                        Bills
+                    </option>
+
+                    <option value="entertainment">
+                        Entertainment
+                    </option>
+
+                    <option value="health">
+                        Health
+                    </option>
+
+                    <option value="salary">
+                        Salary
+                    </option>
+
+                    <option value="bonus">
+                        Bonus
+                    </option>
+
+                    <option value="investment">
+                        Investment
+                    </option>
+
+                    <option value="other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <select id="sortOption">
+
+                    <option value="newest">
+                        Newest First
+                    </option>
+
+                    <option value="oldest">
+                        Oldest First
+                    </option>
+
+                    <option value="highest">
+                        Highest Amount
+                    </option>
+
+                    <option value="lowest">
+                        Lowest Amount
+                    </option>
+
+                </select>
+
+
+            </div>
+
+
+            <div id="transactionsList"></div>
+
+
+        </section>
+
+
+        <section class="card">
+
+
+            <h2>
+                Recent Transactions
+            </h2>
+
+
+            <div id="recentTransactions"></div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
